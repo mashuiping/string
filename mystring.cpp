@@ -24,14 +24,23 @@ String::~String(){
 }
 
 String & String::operator = (const String & other){
-	if(*this == other)
-	  return *this;
+	/*if(*this == other)
+		return *this;
 	else{
 		delete [] m_data;
 		m_data = new char[strlen(other.m_data) + 1];
 		strcpy(m_data, other.m_data);
 		return *this;
+		//modify it on 2017.2.6
+	}*/
+	if(this != &other){
+		String strTemp(other);
+		char * pTemp = strTemp.m_data;
+		strTemp.m_data = this->m_data;
+		this->m_data = pTemp;
+		// 不用delete strTemp.m_data， 程序会自动销毁
 	}
+	return *this;
 }
 
 
